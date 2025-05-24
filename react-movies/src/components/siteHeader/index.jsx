@@ -27,13 +27,14 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const menuOptions = [
-    { label: "Home", path: "/" },
+    { label: "Home", path: "/home" },
     { label: "Now Playing", path: "/now_playing" },
     { label: "Popular", path: "/popular" },
     { label: "Top Rated", path: "/top_rated" },
     { label: "Upcoming", path: "/upcoming" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Watchlist", path: "/watchlist" },
+    
   ];
   
 

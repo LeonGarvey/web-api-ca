@@ -16,6 +16,10 @@ import NowPlayingPage from "./pages/NowPlayingPage";
 import PopularMoviesPage from "./pages/PopularMoviesPage";
 import TopRatedPage from "./pages/TopRatedPage";
 import RecommendationsPage from "./pages/RecommendationsPage";
+import LoginPage from "./pages/loginPage";
+import SignupPage from "./pages/signupPage";
+import ProfilePage from "./pages/profilePage";
+import StartPage from "./pages/startPage";
 import {getTasks, addTask, deleteTask, updateTask} from "./api/tasky-api";
 
 
@@ -36,6 +40,7 @@ const queryClient = new QueryClient({
 });
 
 
+
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -46,7 +51,8 @@ const App = () => {
             <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
             <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
             <Route path="/movies/:id" element={<MoviePage />} />
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<StartPage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="*" element={ <Navigate to="/" /> } />
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route path="/upcoming" element={<UpcomingMoviesPage />} /> 
@@ -55,6 +61,12 @@ const App = () => {
             <Route path="/popular" element={<PopularMoviesPage />} />
             <Route path="/top_rated" element={<TopRatedPage />} />
             <Route path="/movie/:id/recommendations" element={<RecommendationsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/start" element={<StartPage />} />
+            
+            
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

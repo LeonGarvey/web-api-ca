@@ -39,6 +39,7 @@ const HomePage = (props) => {
       movies={movies}
       action={(movie) =><AddToFavoritesIcon movie={movie} />}
     />
+    
     <Stack spacing={2} alignItems="center" sx={{ my: 3 }}>
     <Pagination
       count={Math.min(totalPages, 500)}

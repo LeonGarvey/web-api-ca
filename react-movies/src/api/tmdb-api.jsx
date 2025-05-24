@@ -2,9 +2,9 @@
 const tmdbApiKey = import.meta.env.VITE_TMDB_KEY;
 const tmdbBaseUrl = "https://api.themoviedb.org/3";
 
-export const getMovies = () => {
+export const getMovies = (page= 1) => {
   return fetch(
-    `http://localhost:8080/api/movies/discover`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&page=${page}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {

@@ -27,12 +27,15 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 // Enable CORS for all requests
 app.use(cors());
-app.use('/api/movies', authenticate, moviesRouter); 
+// Public routes (no auth)
+app.use('/api/movies', moviesRouter);
+
+// Protected routes (auth required)
+app.use(authenticate);
+app.use('/api/users', usersRouter);
 
 app.use(errHandler);
 
-//Users router
-app.use('/api/users', usersRouter);
 
 
 
