@@ -3,7 +3,7 @@ import cors from 'cors';
 import './db';
 import dotenv from 'dotenv';
 import express from 'express';
-
+import moviesRouter from './api/movies';   
 import usersRouter from './api/users';
 import authenticate from './authenticate';
 
@@ -26,7 +26,7 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 // Enable CORS for all requests
 app.use(cors());
-
+app.use('/api/movies', moviesRouter); 
 
 app.use(errHandler);
 
