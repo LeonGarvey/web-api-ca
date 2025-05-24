@@ -7,11 +7,21 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router(); // eslint-disable-line
 
-// Get all users
+// Get all tasks
 router.get('/', async (req, res) => {
-    const users = await User.find();
-    res.status(200).json(users);
+    const tasks = await Task.find().populate('userId', 'username');
+    res.status(200).json(tasks);
 });
+
+// register(Create) User
+router.post('/', async (req, res) => {
+    await User(req.body).save();
+    res.status(201).json({
+        code: 201,
+        msg: 'Successful created new user.',
+    });
+});
+
 
 // register(Create)/Authenticate User
 router.post('/', asyncHandler(async (req, res) => {
@@ -32,30 +42,12 @@ router.post('/', asyncHandler(async (req, res) => {
 }));
 
 
+
 async function registerUser(req, res) {
-    const { username, password } = req.body;
-  
-    // Password strength validation
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
-      return res.status(400).json({
-        success: false,
-        msg: 'Password must be at least 8 characters long and include a letter, a number, and a special character.'
-      });
-    }
-  
-    try {
-      const newUser = new User({ username, password });
-      await newUser.save();
-      res.status(201).json({ success: true, msg: 'User successfully created.' });
-    } catch (error) {
-      if (error.code === 11000) {
-        return res.status(400).json({ success: false, msg: 'Username already exists.' });
-      }
-      console.error(error);
-      res.status(500).json({ success: false, msg: 'Internal server error.' });
-    }
-  }
+    // Add input validation logic here
+    await User.create(req.body);
+    res.status(201).json({ success: true, msg: 'User successfully created.' });
+}
 
 async function authenticateUser(req, res) {
     const user = await User.findByUserName(req.body.username);
@@ -71,6 +63,7 @@ async function authenticateUser(req, res) {
         res.status(401).json({ success: false, msg: 'Wrong password.' });
     }
 }
+
 
 
 export default router;
